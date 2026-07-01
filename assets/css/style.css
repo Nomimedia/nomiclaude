@@ -58,6 +58,12 @@ a {
   color: var(--pink);
 }
 
+.brand-logo {
+  height: 42px;
+  width: auto;
+  display: block;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;

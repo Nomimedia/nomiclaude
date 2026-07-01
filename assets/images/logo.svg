@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="mGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff2d87" />
+      <stop offset="50%" stop-color="#c256b0" />
+      <stop offset="100%" stop-color="#5b6fd8" />
+    </linearGradient>
+  </defs>
+  <text x="50%" y="150" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="190" fill="url(#mGrad)">M</text>
+  <ellipse cx="66" cy="48" rx="9" ry="20" fill="#ffffff" opacity="0.55" transform="rotate(-25 66 48)" />
+  <ellipse cx="98" cy="100" rx="13" ry="6" fill="#ffffff" opacity="0.45" transform="rotate(-8 98 100)" />
+  <ellipse cx="150" cy="150" rx="8" ry="16" fill="#ffffff" opacity="0.35" transform="rotate(18 150 150)" />
+</svg>
