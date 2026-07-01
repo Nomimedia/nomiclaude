@@ -1,66 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Step 2 of 3 — Your Goals | Nomi Media</title>
+<title>第二步（共3步）你的目标 Step 2 of 3 | Nomi Media</title>
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body class="form-page">
 
 <div class="top-bar">
   <a href="index.html" class="brand"><img src="assets/images/logo.png" alt="Nomi Media" class="brand-logo" /></a>
-  <a href="index.html" class="btn btn-outline">Home</a>
+  <a href="index.html" class="btn btn-outline">首页 Home</a>
 </div>
 
 <div class="form-wrap">
   <div class="form-card">
-    <div class="progress-label">Step 2 of 3</div>
+    <div class="progress-label">第二步 · 共3步 / STEP 2 OF 3</div>
     <div class="progress-bar"><div class="progress-bar-fill" style="width: 66%;"></div></div>
 
-    <h1>Your Marketing Goals</h1>
-    <p class="form-subtitle">This helps us tailor the content plan to what actually matters for your business.</p>
+    <h1>你的行销目标 Your Marketing Goals</h1>
+    <p class="form-subtitle">这将帮助我们根据你真正重视的方向来打造内容规划。This helps us tailor the content plan to what actually matters for your business.</p>
 
     <form id="step2-form" novalidate>
       <div class="field">
-        <label for="budget">Marketing Budget Per Month</label>
+        <label for="budget">每月行销预算 Marketing Budget Per Month</label>
         <select id="budget" name="budget" required>
-          <option value="">Select your monthly budget</option>
+          <option value="">请选择每月预算 Select your monthly budget</option>
           <option>Below RM1,000</option>
           <option>RM1,000 - RM3,000</option>
           <option>RM3,000 - RM5,000</option>
           <option>RM5,000 - RM10,000</option>
           <option>Above RM10,000</option>
         </select>
-        <div class="error-msg">Please select your monthly marketing budget.</div>
+        <div class="error-msg">请选择每月行销预算 Please select your monthly marketing budget.</div>
       </div>
 
       <div class="field" id="goal-field">
-        <label>Main Goal of Your Marketing</label>
+        <label>主要行销目标 Main Goal of Your Marketing</label>
         <div class="radio-group">
           <label class="radio-option">
             <input type="radio" name="goal" value="Leads" />
-            Leads
+            导流 Leads
           </label>
           <label class="radio-option">
             <input type="radio" name="goal" value="Conversion" />
-            Conversion (Sales)
+            转换 Conversion (Sales)
           </label>
           <label class="radio-option">
             <input type="radio" name="goal" value="Awareness" />
-            Awareness
+            认知 Awareness
           </label>
           <label class="radio-option">
             <input type="radio" name="goal" value="Exposure" />
-            Exposure
+            曝光 Exposure
           </label>
         </div>
-        <div class="error-msg">Please select your main marketing goal.</div>
+        <div class="error-msg">请选择你的主要行销目标 Please select your main marketing goal.</div>
       </div>
 
       <div class="form-actions">
-        <a href="step1.html" class="back-link">← Back</a>
-        <button type="submit" class="btn btn-primary" id="next-btn">Next →</button>
+        <a href="step1.html" class="back-link">← 返回 Back</a>
+        <button type="submit" class="btn btn-primary" id="next-btn">下一步 Next →</button>
       </div>
     </form>
   </div>
@@ -109,7 +109,7 @@
 
     const nextBtn = document.getElementById("next-btn");
     nextBtn.disabled = true;
-    nextBtn.textContent = "Submitting...";
+    nextBtn.textContent = "提交中... Submitting...";
 
     const updated = saveLeadData({
       budget: budgetSelect.value,

@@ -1,70 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Step 1 of 3 — Your Details | Nomi Media</title>
+<title>第一步（共3步）你的资料 Step 1 of 3 | Nomi Media</title>
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body class="form-page">
 
 <div class="top-bar">
   <a href="index.html" class="brand"><img src="assets/images/logo.png" alt="Nomi Media" class="brand-logo" /></a>
-  <a href="index.html" class="btn btn-outline">Home</a>
+  <a href="index.html" class="btn btn-outline">首页 Home</a>
 </div>
 
 <div class="form-wrap">
   <div class="form-card">
-    <div class="progress-label">Step 1 of 3</div>
+    <div class="progress-label">第一步 · 共3步 / STEP 1 OF 3</div>
     <div class="progress-bar"><div class="progress-bar-fill" style="width: 33%;"></div></div>
 
-    <h1>Tell Us About You</h1>
-    <p class="form-subtitle">We'll use this to prepare a content plan that fits your business.</p>
+    <h1>了解你的资料 Tell Us About You</h1>
+    <p class="form-subtitle">资料填写越详细，我们越能精准分析，为你打造合适的内容规划。The more detail you provide, the more tailored your content plan will be.</p>
 
     <form id="step1-form" novalidate>
       <div class="field">
-        <label for="name">Full Name</label>
+        <label for="name">姓名 Full Name</label>
         <input type="text" id="name" name="name" autocomplete="name" required />
-        <div class="error-msg">Please enter your full name.</div>
+        <div class="error-msg">请输入姓名 Please enter your full name.</div>
       </div>
 
       <div class="field">
-        <label for="whatsapp">WhatsApp Number <span class="hint">(with country code, e.g. +60 12-345 6789)</span></label>
+        <label for="whatsapp">WhatsApp 号码 <span class="hint">（含国家区号 with country code, e.g. +60 12-345 6789）</span></label>
         <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" required />
-        <div class="error-msg">Please enter a valid WhatsApp number.</div>
+        <div class="error-msg">请输入有效的WhatsApp号码 Please enter a valid WhatsApp number.</div>
       </div>
 
       <div class="field">
-        <label for="email">Email Address</label>
+        <label for="email">电子邮箱 Email Address</label>
         <input type="email" id="email" name="email" autocomplete="email" required />
-        <div class="error-msg">Please enter a valid email address.</div>
+        <div class="error-msg">请输入有效的电子邮箱 Please enter a valid email address.</div>
       </div>
 
       <div class="field">
-        <label for="industry">Industry</label>
+        <label for="industry">行业类别 Industry</label>
         <select id="industry" name="industry" required>
-          <option value="">Select your industry</option>
-          <option>F&B / Restaurant</option>
-          <option>Retail / E-commerce</option>
-          <option>Beauty / Wellness</option>
-          <option>Health / Medical</option>
-          <option>Education</option>
-          <option>Real Estate</option>
-          <option>Fashion</option>
-          <option>Professional Services</option>
-          <option>Technology</option>
-          <option>Other</option>
+          <option value="">请选择行业 Select your industry</option>
+          <option value="F&amp;B / Restaurant">餐饮 F&amp;B / Restaurant</option>
+          <option value="Retail / E-commerce">零售 / 电商 Retail / E-commerce</option>
+          <option value="Beauty / Wellness">美容 / 保健 Beauty / Wellness</option>
+          <option value="Health / Medical">医疗保健 Health / Medical</option>
+          <option value="Education">教育 Education</option>
+          <option value="Real Estate">房地产 Real Estate</option>
+          <option value="Fashion">时尚 Fashion</option>
+          <option value="Professional Services">专业服务 Professional Services</option>
+          <option value="Technology">科技 Technology</option>
+          <option value="Other">其他 Other</option>
         </select>
-        <div class="error-msg">Please select your industry.</div>
+        <div class="error-msg">请选择行业 Please select your industry.</div>
       </div>
 
       <div class="field" id="industry-other-wrap" style="display:none;">
-        <label for="industry-other">Please specify your industry</label>
+        <label for="industry-other">请注明你的行业 Please specify your industry</label>
         <input type="text" id="industry-other" name="industryOther" />
       </div>
 
       <div class="field">
-        <label>Social Media Links <span class="hint">(fill in at least one)</span></label>
+        <label>社交媒体链接 Social Media Links <span class="hint">（请至少填写一项 fill in at least one）</span></label>
       </div>
 
       <div class="field">
@@ -83,14 +83,14 @@
       </div>
 
       <div class="field">
-        <label for="website">Website / Other</label>
+        <label for="website">网站 / 其他 Website / Other</label>
         <input type="url" id="website" name="website" placeholder="https://yourbusiness.com" />
-        <div class="error-msg">Please fill in at least one social media link, or use a valid URL.</div>
+        <div class="error-msg">请至少填写一项有效的社交媒体链接 Please fill in at least one valid social media link.</div>
       </div>
 
       <div class="form-actions">
         <span></span>
-        <button type="submit" class="btn btn-primary">Next →</button>
+        <button type="submit" class="btn btn-primary">下一步 Next →</button>
       </div>
     </form>
   </div>
@@ -158,7 +158,7 @@
     }
 
     if (industry.value === "Other" && !industryOtherInput.value.trim()) {
-      showFieldError(industryOtherInput, "Please specify your industry.");
+      showFieldError(industryOtherInput, "请注明你的行业 Please specify your industry.");
       valid = false;
     }
 
