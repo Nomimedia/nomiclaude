@@ -11,7 +11,7 @@ window.CONFIG = {
   WHATSAPP_LINK: "https://www.whas.me/3ERhdlkvgY",
 
   // 3. Google Apps Script Web App URL (see apps-script/Code.gs + README.md).
-  GOOGLE_SHEETS_WEBHOOK_URL: "https://script.google.com/macros/s/REPLACE_WITH_YOUR_DEPLOYMENT_ID/exec",
+  GOOGLE_SHEETS_WEBHOOK_URL: "https://script.google.com/macros/s/AKfycbxWPIdjoEWgoyD7SY-F3ZDBsrVRACpJ0_CMJuhVKY7JuxzeNXHSll-aFmo5WkF62QGrtw/exec",
 
   // Brand name shown in the header/footer.
   BRAND_NAME: "Nomi Media",
