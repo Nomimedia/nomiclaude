@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Step 1 of 3 — Your Details | Nomi Media</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="form-page">
+
+<div class="top-bar">
+  <a href="index.html" class="brand">NOMI <span>MEDIA</span></a>
+  <a href="index.html" class="btn btn-outline">Home</a>
+</div>
+
+<div class="form-wrap">
+  <div class="form-card">
+    <div class="progress-label">Step 1 of 3</div>
+    <div class="progress-bar"><div class="progress-bar-fill" style="width: 33%;"></div></div>
+
+    <h1>Tell Us About You</h1>
+    <p class="form-subtitle">We'll use this to prepare a content plan that fits your business.</p>
+
+    <form id="step1-form" novalidate>
+      <div class="field">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" autocomplete="name" required />
+        <div class="error-msg">Please enter your full name.</div>
+      </div>
+
+      <div class="field">
+        <label for="whatsapp">WhatsApp Number <span class="hint">(with country code, e.g. +60 12-345 6789)</span></label>
+        <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" required />
+        <div class="error-msg">Please enter a valid WhatsApp number.</div>
+      </div>
+
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" autocomplete="email" required />
+        <div class="error-msg">Please enter a valid email address.</div>
+      </div>
+
+      <div class="field">
+        <label for="industry">Industry</label>
+        <select id="industry" name="industry" required>
+          <option value="">Select your industry</option>
+          <option>F&B / Restaurant</option>
+          <option>Retail / E-commerce</option>
+          <option>Beauty / Wellness</option>
+          <option>Health / Medical</option>
+          <option>Education</option>
+          <option>Real Estate</option>
+          <option>Fashion</option>
+          <option>Professional Services</option>
+          <option>Technology</option>
+          <option>Other</option>
+        </select>
+        <div class="error-msg">Please select your industry.</div>
+      </div>
+
+      <div class="field" id="industry-other-wrap" style="display:none;">
+        <label for="industry-other">Please specify your industry</label>
+        <input type="text" id="industry-other" name="industryOther" />
+      </div>
+
+      <div class="field">
+        <label>Social Media Links <span class="hint">(fill in at least one)</span></label>
+      </div>
+
+      <div class="field">
+        <label for="instagram">Instagram</label>
+        <input type="url" id="instagram" name="instagram" placeholder="https://instagram.com/yourbusiness" />
+      </div>
+
+      <div class="field">
+        <label for="facebook">Facebook</label>
+        <input type="url" id="facebook" name="facebook" placeholder="https://facebook.com/yourbusiness" />
+      </div>
+
+      <div class="field">
+        <label for="tiktok">TikTok</label>
+        <input type="url" id="tiktok" name="tiktok" placeholder="https://tiktok.com/@yourbusiness" />
+      </div>
+
+      <div class="field">
+        <label for="website">Website / Other</label>
+        <input type="url" id="website" name="website" placeholder="https://yourbusiness.com" />
+        <div class="error-msg">Please fill in at least one social media link, or use a valid URL.</div>
+      </div>
+
+      <div class="form-actions">
+        <span></span>
+        <button type="submit" class="btn btn-primary">Next →</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/form.js"></script>
+<script>
+  const industrySelect = document.getElementById("industry");
+  const industryOtherWrap = document.getElementById("industry-other-wrap");
+  const industryOtherInput = document.getElementById("industry-other");
+
+  industrySelect.addEventListener("change", () => {
+    const isOther = industrySelect.value === "Other";
+    industryOtherWrap.style.display = isOther ? "block" : "none";
+    industryOtherInput.required = isOther;
+  });
+
+  // Restore any previously entered data (e.g. user pressed Back)
+  (function restore() {
+    const data = getLeadData();
+    Object.keys(data).forEach((key) => {
+      const el = document.getElementById(key);
+      if (el && typeof data[key] === "string") el.value = data[key];
+    });
+    if (data.industry === "Other") {
+      industryOtherWrap.style.display = "block";
+    }
+  })();
+
+  document.getElementById("step1-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    let valid = true;
+
+    const name = document.getElementById("name");
+    const whatsapp = document.getElementById("whatsapp");
+    const email = document.getElementById("email");
+    const industry = document.getElementById("industry");
+    const instagram = document.getElementById("instagram");
+    const facebook = document.getElementById("facebook");
+    const tiktok = document.getElementById("tiktok");
+    const website = document.getElementById("website");
+
+    [name, whatsapp, email, industry, instagram, facebook, tiktok, website].forEach(clearFieldError);
+    if (industry.value === "Other") clearFieldError(industryOtherInput);
+
+    if (!name.value.trim()) {
+      showFieldError(name);
+      valid = false;
+    }
+
+    if (!isValidPhone(whatsapp.value.trim())) {
+      showFieldError(whatsapp);
+      valid = false;
+    }
+
+    if (!isValidEmail(email.value.trim())) {
+      showFieldError(email);
+      valid = false;
+    }
+
+    if (!industry.value) {
+      showFieldError(industry);
+      valid = false;
+    }
+
+    if (industry.value === "Other" && !industryOtherInput.value.trim()) {
+      showFieldError(industryOtherInput, "Please specify your industry.");
+      valid = false;
+    }
+
+    const socialValues = [instagram.value.trim(), facebook.value.trim(), tiktok.value.trim(), website.value.trim()];
+    const hasSocial = socialValues.some((v) => v.length > 0);
+    const allValidUrls = socialValues.every((v) => isValidUrl(v));
+
+    if (!hasSocial || !allValidUrls) {
+      showFieldError(website);
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    saveLeadData({
+      name: name.value.trim(),
+      whatsapp: whatsapp.value.trim(),
+      email: email.value.trim(),
+      industry: industry.value === "Other" ? industryOtherInput.value.trim() : industry.value,
+      instagram: instagram.value.trim(),
+      facebook: facebook.value.trim(),
+      tiktok: tiktok.value.trim(),
+      website: website.value.trim(),
+    });
+
+    window.location.href = "step2.html";
+  });
+</script>
+</body>
+</html>

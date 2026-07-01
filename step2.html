@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Step 2 of 3 — Your Goals | Nomi Media</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="form-page">
+
+<div class="top-bar">
+  <a href="index.html" class="brand">NOMI <span>MEDIA</span></a>
+  <a href="index.html" class="btn btn-outline">Home</a>
+</div>
+
+<div class="form-wrap">
+  <div class="form-card">
+    <div class="progress-label">Step 2 of 3</div>
+    <div class="progress-bar"><div class="progress-bar-fill" style="width: 66%;"></div></div>
+
+    <h1>Your Marketing Goals</h1>
+    <p class="form-subtitle">This helps us tailor the content plan to what actually matters for your business.</p>
+
+    <form id="step2-form" novalidate>
+      <div class="field">
+        <label for="budget">Marketing Budget Per Month</label>
+        <select id="budget" name="budget" required>
+          <option value="">Select your monthly budget</option>
+          <option>Below RM1,000</option>
+          <option>RM1,000 - RM3,000</option>
+          <option>RM3,000 - RM5,000</option>
+          <option>RM5,000 - RM10,000</option>
+          <option>Above RM10,000</option>
+        </select>
+        <div class="error-msg">Please select your monthly marketing budget.</div>
+      </div>
+
+      <div class="field" id="goal-field">
+        <label>Main Goal of Your Marketing</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="goal" value="Leads" />
+            Leads
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="goal" value="Conversion" />
+            Conversion (Sales)
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="goal" value="Awareness" />
+            Awareness
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="goal" value="Exposure" />
+            Exposure
+          </label>
+        </div>
+        <div class="error-msg">Please select your main marketing goal.</div>
+      </div>
+
+      <div class="form-actions">
+        <a href="step1.html" class="back-link">← Back</a>
+        <button type="submit" class="btn btn-primary" id="next-btn">Next →</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/form.js"></script>
+<script>
+  const leadData = getLeadData();
+  requireStep1(leadData);
+
+  const budgetSelect = document.getElementById("budget");
+  if (leadData.budget) budgetSelect.value = leadData.budget;
+
+  const goalRadios = document.querySelectorAll('input[name="goal"]');
+  goalRadios.forEach((radio) => {
+    if (leadData.goal && radio.value === leadData.goal) {
+      radio.checked = true;
+      radio.closest(".radio-option").classList.add("selected");
+    }
+    radio.addEventListener("change", () => {
+      document.querySelectorAll(".radio-option").forEach((el) => el.classList.remove("selected"));
+      radio.closest(".radio-option").classList.add("selected");
+    });
+  });
+
+  document.getElementById("step2-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    let valid = true;
+
+    clearFieldError(budgetSelect);
+    document.getElementById("goal-field").classList.remove("has-error");
+
+    if (!budgetSelect.value) {
+      showFieldError(budgetSelect);
+      valid = false;
+    }
+
+    const selectedGoal = document.querySelector('input[name="goal"]:checked');
+    if (!selectedGoal) {
+      document.getElementById("goal-field").classList.add("has-error");
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    const nextBtn = document.getElementById("next-btn");
+    nextBtn.disabled = true;
+    nextBtn.textContent = "Submitting...";
+
+    const updated = saveLeadData({
+      budget: budgetSelect.value,
+      goal: selectedGoal.value,
+    });
+
+    submitLeadToSheet(Object.assign({ submittedAt: new Date().toISOString(), source: "landing-page-ad" }, updated))
+      .finally(() => {
+        window.location.href = "step3.html";
+      });
+  });
+</script>
+</body>
+</html>

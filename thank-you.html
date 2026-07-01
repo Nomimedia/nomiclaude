@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Thank You | Nomi Media</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="form-page">
+
+<div class="top-bar">
+  <a href="index.html" class="brand">NOMI <span>MEDIA</span></a>
+  <a href="index.html" class="btn btn-outline">Home</a>
+</div>
+
+<div class="thankyou-wrap">
+  <div class="thankyou-card">
+    <span class="check">✅</span>
+    <h1>Thank You! Your Application Has Been Received.</h1>
+    <p>
+      Your payment was successful. Our team will review your details and reach
+      out to you via WhatsApp or email within 24 hours. Your custom 30-Day
+      Content Plan will be ready within 3 working days after we finish
+      analyzing your content.
+    </p>
+
+    <div class="thankyou-actions">
+      <a id="whatsapp-btn" href="#" target="_blank" rel="noopener" class="btn btn-primary btn-block">Chat With Us on WhatsApp</a>
+      <a href="index.html" class="btn btn-outline btn-block">Home</a>
+      <a href="#" id="apply-again-btn" class="btn btn-outline btn-block">Apply for Another Application</a>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/form.js"></script>
+<script>
+  document.getElementById("whatsapp-btn").href =
+    (window.CONFIG && window.CONFIG.WHATSAPP_LINK) || "#";
+
+  document.getElementById("apply-again-btn").addEventListener("click", function (e) {
+    e.preventDefault();
+    clearLeadData();
+    window.location.href = "step1.html";
+  });
+</script>
+</body>
+</html>

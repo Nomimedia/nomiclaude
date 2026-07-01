@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Step 3 of 3 — Secure Your Spot | Nomi Media</title>
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="form-page">
+
+<div class="top-bar">
+  <a href="index.html" class="brand">NOMI <span>MEDIA</span></a>
+  <a href="index.html" class="btn btn-outline">Home</a>
+</div>
+
+<div class="form-wrap">
+  <div class="form-card">
+    <div class="progress-label">Step 3 of 3</div>
+    <div class="progress-bar"><div class="progress-bar-fill" style="width: 100%;"></div></div>
+
+    <h1>Secure Your Spot</h1>
+    <p class="form-subtitle">Review your details below, then complete payment to submit your application.</p>
+
+    <ul class="summary-list" id="summary-list"></ul>
+
+    <a href="#" id="pay-btn" class="btn btn-primary btn-block">Proceed to Secure Payment →</a>
+
+    <p class="notice">
+      You'll be redirected to our secure Stripe payment page. After your payment
+      is confirmed, you'll be brought straight back here to a thank-you page —
+      no need to do anything else.
+    </p>
+  </div>
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/form.js"></script>
+<script>
+  const leadData = getLeadData();
+  requireStep1(leadData);
+  requireStep2(leadData);
+
+  const summaryFields = [
+    ["Name", "name"],
+    ["WhatsApp", "whatsapp"],
+    ["Email", "email"],
+    ["Industry", "industry"],
+    ["Monthly Budget", "budget"],
+    ["Main Goal", "goal"],
+  ];
+
+  const summaryList = document.getElementById("summary-list");
+  summaryFields.forEach(([label, key]) => {
+    if (!leadData[key]) return;
+    const li = document.createElement("li");
+    li.innerHTML = `<span>${label}</span><span>${leadData[key]}</span>`;
+    summaryList.appendChild(li);
+  });
+
+  const payBtn = document.getElementById("pay-btn");
+  const paymentLink = (window.CONFIG && window.CONFIG.STRIPE_PAYMENT_LINK) || "#";
+  payBtn.href = paymentLink;
+
+  if (!paymentLink || paymentLink.includes("REPLACE_WITH")) {
+    payBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      alert("Payment link is not configured yet. Please add your Stripe Payment Link in assets/js/config.js.");
+    });
+  }
+</script>
+</body>
+</html>
