@@ -152,18 +152,29 @@ a {
 }
 
 .hero-media {
-  flex: 0 0 320px;
+  flex: 0 0 260px;
   display: flex;
   justify-content: center;
 }
 
 .hero-photo-frame {
   position: relative;
-  width: 300px;
-  height: 380px;
+  width: 240px;
+  height: 310px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (min-width: 900px) {
+  .hero-media {
+    flex-basis: 320px;
+  }
+
+  .hero-photo-frame {
+    width: 300px;
+    height: 380px;
+  }
 }
 
 .hero-photo-frame::before {
@@ -186,7 +197,7 @@ a {
   object-position: bottom;
 }
 
-@media (max-width: 780px) {
+@media (max-width: 640px) {
   .hero-flex {
     flex-direction: column;
     text-align: center;
@@ -232,15 +243,17 @@ a {
 
 .grid-4 {
   grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 640px) {
   .grid-4 {
     grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 420px) {
   .grid-4 {
     grid-template-columns: 1fr;
   }
@@ -362,7 +375,7 @@ a {
   margin-top: 0;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 640px) {
   .feature-row,
   .feature-row.reverse {
     flex-direction: column;
@@ -399,17 +412,18 @@ a {
 .steps-list {
   counter-reset: step;
   display: grid;
-  gap: 22px;
+  gap: 14px;
   grid-template-columns: repeat(4, 1fr);
 }
 
-@media (max-width: 860px) {
+@media (max-width: 640px) {
   .steps-list {
     grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 420px) {
   .steps-list {
     grid-template-columns: 1fr;
   }
