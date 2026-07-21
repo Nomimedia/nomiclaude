@@ -32,13 +32,36 @@ Developer / meta:
 `connect`, `connect-apps`, `developer-growth-analysis`, `langsmith-fetch`,
 `mcp-builder`, `skill-creator`, `skill-share`, `template-skill` (starter scaffold).
 
-## Not installed: Composio automation stubs
+### Curated Composio automations (8 installed)
+A focused, content-agency-relevant slice of the `*-automation` pack. **All of
+these require the Rube MCP server** — add `https://rube.app/mcp` as an MCP
+server in your client, then complete each app's OAuth via
+`RUBE_MANAGE_CONNECTIONS`. Until Rube is connected they act as reference docs
+only.
 
-The `awesome-claude-skills` pack also contained **832** `*-automation`
-Composio/Rube-MCP skill stubs (adobe, salesforce, hubspot, …). They are
-near-identical boilerplate that all require the **Rube MCP** server
-(`https://rube.app/mcp`) and per-app OAuth, so installing them wholesale would
-add noise without working functionality. They were intentionally skipped.
+| Skill | Covers |
+|-------|--------|
+| `ayrshare-automation` ⭐ | Publish/schedule to **Instagram, TikTok, YouTube, Facebook, LinkedIn, X, Pinterest** + post analytics |
+| `metaads-automation` | Facebook & Instagram ad campaigns, creatives, reporting |
+| `googleads-automation` | Google Ads links, GA4 reports, account listing |
+| `typefully-automation` | X/Twitter thread drafting & scheduling |
+| `giphy-automation` | GIF search/insertion |
+| `pexels-automation` | Free stock photos & video |
+| `contentful-automation` | Headless CMS spaces & content |
+| `adobe-automation` | Adobe toolkit operations |
 
-If you want a curated subset wired up — e.g. Instagram, TikTok, YouTube,
-Canva, Notion, Gmail, Google Drive — ask and I'll add just those.
+## Why the apps you named aren't all here
+
+- **Instagram / TikTok / YouTube** aren't standalone Composio stubs in this
+  pack — `ayrshare-automation` above is the unified way to post to all of them.
+- **Notion, Gmail, Google Drive, Google Calendar, Canva, ClickUp** already have
+  **native MCP servers** in this workspace, which are better than Composio
+  stubs, so those stubs were deliberately *not* installed.
+- `canvas-automation` in the pack is **Canvas LMS**, not Canva — skipped.
+
+## Not installed: the rest of the Composio pack
+
+The `awesome-claude-skills` pack contained **832** `*-automation` stubs total.
+The remaining ~824 are near-identical Rube-MCP boilerplate for apps a content
+agency is unlikely to use; they were intentionally skipped. Ask for any
+specific app by name and I'll add its stub.
