@@ -6,7 +6,7 @@
 <title>Nomi Media OS</title>
 <meta name="description" content="Nomi Media OS — internal command center for clients, skills, agents, portfolio, meetings and company details." />
 <meta name="robots" content="noindex, nofollow" />
-<link rel="icon" href="../assets/images/logo.png" />
+<link rel="icon" href="assets/images/logo.png" />
 <link rel="stylesheet" href="assets/os.css" />
 </head>
 <body>
@@ -16,7 +16,7 @@
   <!-- ============ SIDEBAR ============ -->
   <aside class="sidebar" id="sidebar">
     <div class="brand">
-      <img src="../assets/images/logo.png" alt="Nomi Media" />
+      <img src="assets/images/logo.png" alt="Nomi Media" />
       <span class="os-tag">OS</span>
     </div>
 
@@ -39,6 +39,10 @@
     <div class="nav-item" data-view="meetings">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       <span>Meetings</span>
+    </div>
+    <div class="nav-item" data-view="files">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+      <span>Files &amp; Notion</span>
     </div>
     <div class="nav-item" data-view="company">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
@@ -64,7 +68,15 @@
           <div class="sub" id="page-sub">Everything at a glance</div>
         </div>
       </div>
-      <input class="search" id="global-search" type="search" placeholder="Search this view…" />
+      <div class="topbar-right">
+        <span class="live-badge offline" id="live-status" title="Data source status">
+          <span class="dot"></span><span class="live-text">Loading…</span>
+        </span>
+        <button class="icon-btn" id="refresh-btn" title="Refresh live data" aria-label="Refresh">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </button>
+        <input class="search" id="global-search" type="search" placeholder="Search this view…" />
+      </div>
     </div>
 
     <div class="content">
@@ -110,6 +122,14 @@
         <div id="meetings-upcoming"></div>
         <div class="section-title">Past &amp; notes</div>
         <div id="meetings-past"></div>
+      </section>
+
+      <!-- FILES & NOTION -->
+      <section class="view" id="view-files">
+        <div class="section-title">Recent Drive files</div>
+        <div class="file-list" id="files-list"></div>
+        <div class="section-title">Recent in Notion</div>
+        <div class="file-list" id="notion-list"></div>
       </section>
 
       <!-- COMPANY -->

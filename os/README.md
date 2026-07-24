@@ -49,10 +49,23 @@ then visit `https://yourdomain.com/os/`. It reuses the shared logo in
 The page is marked `noindex` so it stays out of search engines — it's for your
 team, not the public.
 
-## Data source
+## Two ways to run it
 
-The initial data was seeded on 2026-07-24 from your live Notion workspace,
-Google Drive and Google Calendar (clients, packages, the Ostrich Films meeting,
-invoices for JCI and Pastry Lab, etc.). To refresh it automatically from those
-APIs on every load you'd need the "app with a live backend" option — this
-version keeps it simple and secret-free by baking the data into the file above.
+**1. Live (recommended) — with the backend.**
+Run the Node backend in `../server` and it pulls **live** data from Notion,
+Google Drive and Google Calendar, and serves this dashboard. Meetings, files
+and Notion pages stay up to date automatically. Full step-by-step setup +
+deployment (Render / Railway / VPS / Hostinger-Node) is in
+[`../server/README.md`](../server/README.md). The top-bar badge shows **Live**
+when connected, with an "updated Xm ago" time and a ↻ refresh button, plus two
+extra modules powered by the APIs: **Meetings** (Calendar) and **Files & Notion**
+(Drive + Notion).
+
+**2. Static — no backend.**
+Just upload this `os/` folder to Hostinger. The dashboard reads the baked-in
+snapshot in `data/nomi-data.js` (seeded 2026-07-24 from your live Notion, Drive
+and Calendar). The badge shows "Offline · showing saved data". Edit that file to
+update content.
+
+The frontend automatically detects which mode it's in — if the backend/API
+isn't reachable, it falls back to the saved snapshot, so the page never breaks.
