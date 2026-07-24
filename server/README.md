@@ -90,21 +90,46 @@ What you get live: the **Meetings** module (Google Calendar) and the
 
 ## 4. Deploy with your domain
 
-Pick one host. In all cases: set the same environment variables from your
-`server/.env` in the host's dashboard (never upload the `.env` file itself),
-and set the start command to `npm start`.
+Set your credentials as **environment variables** in the host's dashboard
+(never upload the `.env` file itself). The variable names are the same ones
+listed in `server/.env.example`.
 
-### Render (easiest, has a free tier)
+### Netlify (recommended — this repo is preconfigured for it)
+
+Netlify serves the dashboard from its CDN and runs the API as serverless
+functions. Everything is already wired up in `netlify.toml` — you don't run a
+server, Netlify does it for you.
+
 1. Push this repo to GitHub (already done).
-2. Render → **New → Web Service** → connect the repo.
-3. Build command `npm install`, start command `npm start`.
-4. Add your env vars under **Environment**.
-5. Deploy → you get a URL. Then **Settings → Custom Domain** → add your domain
-   and follow the DNS instructions (add the CNAME/A record at your registrar).
+2. Netlify → **Add new site → Import an existing project** → pick this repo.
+3. Netlify auto-detects the settings from `netlify.toml`
+   (publish dir `os`, functions `netlify/functions`). Just click **Deploy**.
+4. **Site configuration → Environment variables** → add the ones you use:
+   - `NOTION_TOKEN` (and optionally `NOTION_CLIENTS_DB_ID`)
+   - `GOOGLE_SERVICE_ACCOUNT_JSON`, `GOOGLE_CALENDAR_ID`
+     (and optionally `GOOGLE_DRIVE_FOLDER_ID`)
+   - *(optional login)* `OS_USERNAME`, `OS_PASSWORD`
+   Then **Deploys → Trigger deploy** so the new vars take effect.
+5. **Domain management → Add a custom domain** → enter your domain and follow
+   Netlify's DNS instructions (either point your registrar's nameservers to
+   Netlify, or add the CNAME/A record they show). HTTPS is automatic.
 
-### Railway
-Same idea: **New Project → Deploy from repo**, add env vars, then add a custom
-domain under the service's **Settings → Networking**.
+That's it — open your domain and the top-bar badge should show **Live**.
+
+Tip: to preview locally exactly as Netlify runs it:
+`npx netlify-cli dev` (it reads `netlify.toml`, serves `os`, and runs the
+functions at `/api/*`).
+
+### Render (alternative — runs the Express server)
+1. Render → **New → Web Service** → connect the repo.
+2. Build command `npm install`, start command `npm start`.
+3. Add your env vars under **Environment**.
+4. Deploy → you get a URL. Then **Settings → Custom Domain** → add your domain
+   and follow the DNS instructions.
+
+### Railway (alternative)
+**New Project → Deploy from repo**, add env vars, then add a custom domain
+under the service's **Settings → Networking**.
 
 ### VPS (full control)
 ```bash
@@ -151,4 +176,6 @@ and install dependencies.
   login** is included: set `OS_USERNAME` and `OS_PASSWORD` in your environment
   and the whole OS (dashboard + API) requires that username/password. Leave
   them blank to keep it open. Turn it on before putting the OS on a public
-  domain.
+  domain. (On Netlify this is enforced by the edge function
+  `netlify/edge-functions/auth.js`, which covers the static dashboard too; on
+  other hosts it's enforced by the Express server.)

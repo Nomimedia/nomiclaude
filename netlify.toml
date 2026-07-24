@@ -1,0 +1,47 @@
+# =============================================================================
+# Netlify configuration for Nomi Media OS
+# - Serves the dashboard (the /os folder) as the site.
+# - Runs the API as serverless functions, mapped to /api/*.
+# - Optional site-wide login via the edge function (see netlify/edge-functions).
+# =============================================================================
+
+[build]
+  # The dashboard is the site root.
+  publish = "os"
+  functions = "netlify/functions"
+  # No build step needed — it's static + functions. `npm install` runs
+  # automatically so the functions get their dependencies.
+  command = "echo 'no build step'"
+
+[functions]
+  node_bundler = "esbuild"
+  # Keep heavy / dynamic-require deps as real node_modules in the bundle.
+  external_node_modules = ["@notionhq/client", "googleapis", "google-auth-library", "gaxios"]
+
+# Pretty API paths → serverless functions
+[[redirects]]
+  from = "/api/data"
+  to = "/.netlify/functions/data"
+  status = 200
+[[redirects]]
+  from = "/api/meetings"
+  to = "/.netlify/functions/meetings"
+  status = 200
+[[redirects]]
+  from = "/api/drive"
+  to = "/.netlify/functions/drive"
+  status = 200
+[[redirects]]
+  from = "/api/notion"
+  to = "/.netlify/functions/notion"
+  status = 200
+[[redirects]]
+  from = "/api/health"
+  to = "/.netlify/functions/health"
+  status = 200
+
+# Optional login for the whole site (activates only when OS_USERNAME /
+# OS_PASSWORD env vars are set in Netlify).
+[[edge_functions]]
+  function = "auth"
+  path = "/*"
