@@ -35,12 +35,20 @@ function getAuth() {
   // Env vars often escape newlines in the private key — restore them.
   if (creds.private_key) creds.private_key = creds.private_key.replace(/\\n/g, "\n");
 
+  // Optional Domain-Wide Delegation: on Google Workspace, set
+  // GOOGLE_IMPERSONATE_SUBJECT to a user email (e.g. admin@nomimediamy.com) and
+  // authorize the service account in the Admin console. The service account
+  // then reads AS that user — full calendar details + all their Drive, with no
+  // per-item sharing. (Requires the delegation to be set up in Admin console.)
+  const subject = process.env.GOOGLE_IMPERSONATE_SUBJECT;
+
   return new google.auth.GoogleAuth({
     credentials: creds,
     scopes: [
       "https://www.googleapis.com/auth/calendar.readonly",
       "https://www.googleapis.com/auth/drive.readonly",
     ],
+    clientOptions: subject ? { subject } : undefined,
   });
 }
 
