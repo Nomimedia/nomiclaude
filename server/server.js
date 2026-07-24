@@ -21,6 +21,28 @@ const content = require("./config/content");
 const app = express();
 app.use(cors());
 
+/* ---------------------------------------------------------------------------
+   OPTIONAL login protection (HTTP Basic Auth).
+   Inert by default. Set OS_USERNAME and OS_PASSWORD in the environment to
+   require a login for the whole OS (dashboard + API) — recommended when the
+   OS is reachable on a public domain, since it holds client & invoice data.
+--------------------------------------------------------------------------- */
+const AUTH_USER = process.env.OS_USERNAME;
+const AUTH_PASS = process.env.OS_PASSWORD;
+if (AUTH_USER && AUTH_PASS) {
+  app.use(function (req, res, next) {
+    const header = req.headers.authorization || "";
+    const [scheme, encoded] = header.split(" ");
+    if (scheme === "Basic" && encoded) {
+      const [user, pass] = Buffer.from(encoded, "base64").toString("utf8").split(":");
+      if (user === AUTH_USER && pass === AUTH_PASS) return next();
+    }
+    res.set("WWW-Authenticate", 'Basic realm="Nomi Media OS", charset="UTF-8"');
+    return res.status(401).send("Authentication required.");
+  });
+  console.log("  Login:   protected (OS_USERNAME / OS_PASSWORD set)");
+}
+
 const OS_DIR = path.join(__dirname, "..", "os");
 const TTL = parseInt(process.env.CACHE_TTL_SECONDS || "300", 10); // 5 min default
 

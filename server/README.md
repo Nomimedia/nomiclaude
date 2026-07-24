@@ -147,6 +147,8 @@ and install dependencies.
 
 - **Never commit `server/.env`** or the service-account JSON — `.gitignore`
   already blocks them. Set secrets in your host's env-var settings.
-- The OS is an internal tool. If you host it on a public domain, consider
-  putting it behind a login (HTTP basic auth at the proxy, Cloudflare Access,
-  or similar). Ask and this can be added.
+- The OS is an internal tool holding client & invoice data. A **built-in
+  login** is included: set `OS_USERNAME` and `OS_PASSWORD` in your environment
+  and the whole OS (dashboard + API) requires that username/password. Leave
+  them blank to keep it open. Turn it on before putting the OS on a public
+  domain.
